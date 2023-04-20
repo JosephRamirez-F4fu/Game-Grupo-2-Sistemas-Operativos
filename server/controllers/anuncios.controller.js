@@ -1,13 +1,4 @@
 import {pool} from '../db.js';
-//crear un tipo de anuncio
-export const createTypeAdd = async (req, res) => {
-    try {
-        const [result] = await pool.query('INSERT INTO tipo_anuncios (nombre) VALUES ($1)', [req.body.nombre]);
-        req.status(200).json(result);
-    }catch (error) {
-        res.status(500).json(error);
-    };
-};
 //obtener un tipo de anuncio
 export const getTypeAdd = async (req, res) => {
     try{
@@ -26,20 +17,11 @@ export const CreateAdd = async (req, res) => {
         res.status(500).send(error);
     }
 };
-//obtener anuncios de un producto
-export const getAddProduct = async (req, res) => {
-    try{
-        const [result] = await pool.query('SELECT * FROM anuncios WHERE Videojuego_id = $1', [req.body.Videojuego_id]);
-        res.status(200).json(result);
-    }catch(error){
-        res.status(500).json(error);
-    };
-}
 
 //obtener anuncios de un producto de un tipo de anuncio
 export const getAddType = async (req, res) => {
     try{
-        const [result] = await pool.query('SELECT * FROM anuncios WHERE TipoAnuncio_id = $1', [req.body.TipoAnuncio_id]);
+        const [result] = await pool.query('SELECT * FROM anuncios WHERE TipoAnuncio_id = $1 and Videojuego_id = $2', [req.body.TipoAnuncio_id, req.body.Videojuego_id]);
         res.status(200).json(result);
     }catch(error){
         res.status(500).json(error);
