@@ -1,24 +1,19 @@
 import {Router} from 'express';
+import {getProductos,
+    getProductobyid,
+    insertProducto,
+    deleteProductobyid,
+    getProductobyname} from '../controllers/productos.controller.js';
+
 const router = Router();
 
-router.get('api/productos', (req, res) => {
-    res.send('Hello World!');
-});
+router.get('/api/productos',getProductos);
+router.get('/api/productos/:id',getProductobyid);
 
-router.get('api/productos:id', (req, res) => {
-    res.send('Hello World!');
-});
+router.post('/api/productos/:nombre/',insertProducto);
 
-router.post('api/productos', (req, res) => {
-    res.send('Hello World!');
-});
+router.delete('/api/productos/:id',deleteProductobyid);
 
-router.put('api/productos:id', (req, res) => {
-    res.send('Hello World!');
-});
-
-router.delete('api/productos:id', (req, res) => {
-    res.send('Hello World!');
-});
+router.get('/api/productos/:name',getProductobyname);
 
 export default router;
